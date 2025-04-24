@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Support - VersaTechX Campus</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet" />
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">
+      <img src="images/logo vtx web.png" alt="Logo" style="height: 100px; vertical-align: middle;"> VersaTechX Campus
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="courses.html">Courses</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="support.html" class="active">Support</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      
+    </nav>
+    
+  </header>
+
+  <section class="support-hero">
+    <h1>Support Center</h1>
+    <p>We’re here to help. Check out the FAQs below or reach out directly.</p>
+  </section>
+
+  <section class="faqs">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq">
+      <h3>How do I enroll in a course?</h3>
+      <p>Click on the "Courses" menu, select your desired course, and follow the instructions on the course page.</p>
+    </div>
+    <div class="faq">
+      <h3>Are your courses beginner-friendly?</h3>
+      <p>Yes! Our courses are designed with beginners in mind, with a step-by-step, project-based approach.</p>
+    </div>
+    <div class="faq">
+      <h3>Can I get one-on-one support?</h3>
+      <p>Absolutely. We offer mentorship and support upon request. Use the contact form to reach out anytime.</p>
+    </div>
+    <div class="faq">
+      <h3>Do I get a certificate?</h3>
+      <p>Yes, you’ll receive a certificate after completing all tasks and final projects for your course.</p>
+    </div>
+    <div class="faq">
+      <h3>How can I access the course videos?</h3>
+      <p>After enrolling, you will receive a private access link to all your module videos.</p>
+    </div>
+  </section>
+
+  <section class="support-contact">
+    <div class="container">
+      <h2>Need More Help?</h2>
+  
+      <div class="office-hours">
+        <h3>📅 Office Hours</h3>
+        <p>Monday to Saturday: <strong>8:00 AM – 5:00 PM (EAT)</strong></p>
+      </div>
+  
+      <div class="real-time-support">
+        <a href="https://wa.me/254712165017" target="_blank" class="support-btn">
+          💬 Request Real-Time Support on WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+  
+
+  <footer>
+    <div class="footer-content">
+      <p>&copy; 2025 VersaTechX Campus. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="#">Terms & Conditions</a> |
+        <a href="#">Privacy Policy</a> |
+        <a href="support.html">Support</a>
+      </div>
+      <div class="social-icons">
+        <a href="#"><i class="ri-facebook-fill"></i></a>
+        <a href="#"><i class="ri-twitter-fill"></i></a>
+        <a href="#"><i class="ri-instagram-fill"></i></a>
+        <a href="#"><i class="ri-youtube-fill"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const hamburger = document.getElementById("hamburgerBtn");
+    const navLinks = document.querySelector(".nav-links");
+    const navItems = document.querySelectorAll(".nav-links li a");
+  
+    // Toggle menu on hamburger click
+    hamburger.addEventListener("click", () => {
+      navLinks.classList.toggle("show");
+    });
+  
+    // Close menu when a nav link is clicked
+    navItems.forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("show");
+      });
+    });
+  </script>
+
+</body>
+</html>
