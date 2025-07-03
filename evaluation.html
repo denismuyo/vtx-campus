@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>VTX 360 Evaluation Report</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #f0f4f8;
+      padding: 20px;
+    }
+    .container {
+      max-width: 700px;
+      background: #fff;
+      padding: 30px;
+      margin: auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    h2 {
+      color: #004e92;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    label {
+      margin-top: 10px;
+      font-weight: 600;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-family: inherit;
+    }
+    button {
+      background: linear-gradient(45deg, #004e92, #4286f4);
+      color: white;
+      font-weight: bold;
+      padding: 12px;
+      border: none;
+      width: 100%;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .branded-box {
+      background: linear-gradient(90deg, #cce0ff, #e6f0ff);
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>VTX 360° Student Evaluation</h2>
+
+    <div class="branded-box">
+      <label>Student Name</label>
+      <input id="studentName" type="text" placeholder="Enter full name" />
+
+      <label>Student ID</label>
+      <input id="studentID" type="text" placeholder="e.g. VSX1001" />
+
+      <label>Course Enrolled</label>
+      <input id="course" type="text" placeholder="e.g. Graphic Design - Certificate" />
+    </div>
+
+    <div class="branded-box">
+      <label>Progress (%)</label>
+      <input id="progress" type="number" placeholder="e.g. 70" />
+
+      <label>Skill Score (0–10)</label>
+      <input id="skills" type="number" min="0" max="10" />
+
+      <label>Creativity & Originality (0–10)</label>
+      <input id="creativity" type="number" min="0" max="10" />
+    </div>
+
+    <div class="branded-box">
+      <label>Task Completion</label>
+      <textarea id="task" placeholder="Summary of tasks completed"></textarea>
+
+      <label>Communication & Responsiveness</label>
+      <textarea id="communication" placeholder="WhatsApp, email, portal engagement"></textarea>
+
+      <label>Payment Status</label>
+      <select id="payment">
+        <option value="Paid">Paid</option>
+        <option value="Pending">Pending</option>
+        <option value="Partial">Partial</option>
+      </select>
+    </div>
+
+    <div class="branded-box">
+      <label>Trainer Comments</label>
+      <textarea id="comments"></textarea>
+    </div>
+
+    <button onclick="generatePDF()">Generate PDF Report</button>
+  </div>
+
+  <script>
+    async function generatePDF() {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+
+      const name = document.getElementById("studentName").value;
+      const id = document.getElementById("studentID").value;
+      const course = document.getElementById("course").value;
+      const progress = document.getElementById("progress").value;
+      const skills = document.getElementById("skills").value;
+      const creativity = document.getElementById("creativity").value;
+      const task = document.getElementById("task").value;
+      const comms = document.getElementById("communication").value;
+      const payment = document.getElementById("payment").value;
+      const comments = document.getElementById("comments").value;
+
+      const now = new Date();
+      const formattedDate = now.toLocaleDateString();
+      const formattedTime = now.toLocaleTimeString();
+
+      // HEADER
+      doc.setFillColor(66, 134, 244);
+      doc.roundedRect(10, 10, 190, 15, 4, 4, 'F');
+      doc.setTextColor(255);
+      doc.setFontSize(12);
+      doc.setFont("helvetica", "bold");
+      doc.text("VersaTechX Campus | 360° Progress Report", 105, 20, null, null, "center");
+
+      // DETAILS
+      doc.setTextColor(0);
+      doc.setFontSize(10);
+      doc.setFont("helvetica", "normal");
+      doc.text(`Student Name: ${name}`, 15, 35);
+      doc.text(`Student ID: ${id}`, 15, 42);
+      doc.text(`Course: ${course}`, 15, 49);
+      doc.text(`Report Generated On: ${formattedDate} at ${formattedTime}`, 15, 56);
+
+      // METRICS BOX
+      doc.setDrawColor(0, 122, 204);
+      doc.setFillColor(204, 229, 255);
+      doc.roundedRect(12, 60, 186, 30, 3, 3, 'F');
+      doc.setFontSize(10);
+      doc.setTextColor(0);
+      doc.text(`Progress: ${progress}%`, 20, 70);
+      doc.text(`Skill Score: ${skills}/10`, 100, 70);
+      doc.text(`Creativity: ${creativity}/10`, 20, 80);
+      doc.text(`Payment Status: ${payment}`, 100, 80);
+
+      let yOffset = 95;
+
+      function drawBox(title, content, yStart) {
+        const lines = doc.splitTextToSize(content, 180);
+        const boxHeight = lines.length * 6 + 12;
+
+        // Add new page if overflowing
+        if (yStart + boxHeight > 270) {
+          doc.addPage();
+          yStart = 20;
+        }
+
+        doc.setFillColor(230, 244, 255);
+        doc.roundedRect(12, yStart, 186, boxHeight, 3, 3, 'F');
+        doc.setTextColor(0);
+        doc.setFontSize(10);
+        doc.text(title, 15, yStart + 6);
+        doc.text(lines, 15, yStart + 12);
+
+        return yStart + boxHeight + 5;
+      }
+
+      yOffset = drawBox("Task Completion", task, yOffset);
+      yOffset = drawBox("Communication & Responsiveness", comms, yOffset);
+      yOffset = drawBox("Trainer Comments", comments, yOffset);
+
+      // FOOTER
+      if (yOffset > 270) doc.addPage();
+      doc.setFontSize(9);
+      doc.setTextColor(100);
+      doc.text("Generated by VersaTechX Campus | https://denismuyo.github.io/vtx-campus", 105, 285, null, null, "center");
+
+      doc.save(`${name.replace(/\s+/g, "_")}_VTX_360_Report.pdf`);
+    }
+  </script>
+</body>
+</html>
