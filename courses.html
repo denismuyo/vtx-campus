@@ -6,21 +6,48 @@
   <title>Courses - VersaTechX Campus</title>
   <link rel="stylesheet" href="style.css"/>
   <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
+  <script>
+  if (localStorage.getItem("loggedIn") !== "true") {
+    window.location.href = "login.html"; // Redirect to login if not logged in
+  }
+</script>
 </head>
 <body>
   <!-- Navbar -->
   <header class="navbar">
     <div class="logo">
-      <img src="logo vtx web.png" alt="Logo" style="height: 100px; vertical-align: middle;"> VersaTechX Campus
+      <img src="logo vtx web.png" alt="VersaTechX Logo" />
     </div>
     <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="courses.html" class="active">Courses</a></li>
+      <ul class="nav-links">
+        
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="courses.html">Courses</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="support.html">Support</a></li>
         <li><a href="contact.html">Contact</a></li>
+        <div class="log"><button 
+  onclick="logout()"
+  class="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 
+         hover:from-pink-500 hover:to-purple-600 
+         text-white font-semibold py-2 px-6 
+         rounded-lg shadow-md transition-all duration-300 
+         transform hover:scale-105 focus:outline-none mt-4"
+>
+  Logout
+</button>
+
+
+<script>
+  function logout() {
+    localStorage.removeItem("loggedIn");
+    localStorage.removeItem("username");
+    window.location.href = "login.html";
+  }
+</script>
+</div>
       </ul>
+      
     </nav>
   </header>
 
@@ -47,6 +74,30 @@
       <div class="course-card" style="background-image: url('digital-marketing.jpeg');">
         <h2>Digital Marketing</h2>
         <p>Understand SEO, social media, email marketing, and how to grow a brand online.</p>
+        <a href="#" class="btn">Coming Soon</a>
+      </div>
+      
+      <div class="course-card" style="background-image: url('tech-for-beginners.jpeg');">
+        <h2>MS Suite</h2>
+        <p>Basic digital skills, internet literacy, email, typing, and computer use for total beginners.</p>
+        <a href="#" class="btn">Coming Soon</a>
+      </div>
+
+      <div class="course-card" style="background-image: url('tech-for-beginners.jpeg');">
+        <h2>Video Editing</h2>
+        <p>Basic digital skills, internet literacy, email, typing, and computer use for total beginners.</p>
+        <a href="#" class="btn">Coming Soon</a>
+      </div>
+
+      <div class="course-card" style="background-image: url('tech-for-beginners.jpeg');">
+        <h2>UI/UX</h2>
+        <p>Basic digital skills, internet literacy, email, typing, and computer use for total beginners.</p>
+        <a href="#" class="btn">Coming Soon</a>
+      </div>
+
+      <div class="course-card" style="background-image: url('tech-for-beginners.jpeg');">
+        <h2>Social Media Management</h2>
+        <p>Basic digital skills, internet literacy, email, typing, and computer use for total beginners.</p>
         <a href="#" class="btn">Coming Soon</a>
       </div>
       
