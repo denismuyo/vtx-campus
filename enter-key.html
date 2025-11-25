@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enter Enrollment Key - VTX Campus</title>
+  <link rel="stylesheet" href="style.css">
+
+  <script>
+    const keys = {
+      "graphic-design": "GDCERT2025",
+      "web-development": "WDCERT2025",
+      "digital-marketing": "DMCERT2025",
+      "ms-suite": "MSCERT2025",
+      "video-editing": "VECERT2025",
+      "ui-ux": "UIUX2025",
+      "smm": "SMM2025",
+      "tech-beginners": "TFCERT2025"
+    };
+
+    function checkKey() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const course = urlParams.get("course");
+
+      let input = document.getElementById("keyInput").value.trim();
+
+      if (input === keys[course]) {
+        localStorage.setItem(`access_${course}`, "true");
+        window.location.href = course + ".html";
+      } else {
+        alert("Invalid enrollment key!");
+      }
+    }
+  </script>
+
+  <style>
+    .key-box {
+      max-width: 400px;
+      margin: 120px auto;
+      padding: 30px;
+      border-radius: 12px;
+      background: white;
+      text-align: center;
+      box-shadow: 0 4px 25px rgba(0,0,0,0.1);
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-top: 15px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    button {
+      margin-top: 20px;
+      padding: 12px 20px;
+      background: #6c5ce7;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="key-box">
+    <h2>Enter Enrollment Key</h2>
+    <p>Please enter your course enrollment key to continue.</p>
+
+    <input type="text" id="keyInput" placeholder="Enter your key...">
+    <button onclick="checkKey()">Verify Key</button>
+  </div>
+</body>
+</html>
