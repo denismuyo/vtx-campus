@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enter Enrollment Key – VTX Campus</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <script>
+    /* ── ORIGINAL KEY LOGIC — UNTOUCHED ── */
+    const keys = {
+      "graphic-design":    "GDCERT2025",
+      "web-development":   "WDCERT2025",
+      "digital-marketing": "DMCERT2025",
+      "ms-suite":          "MSCERT2025",
+      "video-editing":     "VECERT2025",
+      "ui-ux":             "UIUX2025",
+      "smm-mod1":          "SMM2026",
+      "tech-beginners":    "TFCERT2025"
+    };
+
+    function checkKey() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const course    = urlParams.get("course");
+      let   input     = document.getElementById("keyInput").value.trim();
+
+      /* ── ENHANCED: delegate to UI wrapper ── */
+      verifyKey(course, input);
+    }
+  </script>
+
+  <style>
+    /* ─────────────────────────────────────────
+       RESET & ROOT
+    ───────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary:        #2563EB;
+      --primary-light:  #DBEAFE;
+      --primary-dark:   #1D4ED8;
+      --primary-deep:   #1E3A8A;
+      --bg:             #EFF6FF;
+      --card:           #ffffff;
+      --text:           #111827;
+      --muted:          #6B7280;
+      --border:         #E5E7EB;
+      --success:        #059669;
+      --success-light:  #D1FAE5;
+      --success-border: #6EE7B7;
+      --danger:         #DC2626;
+      --danger-light:   #FEE2E2;
+      --danger-border:  #FCA5A5;
+      --radius:         20px;
+      --shadow:         0 4px 24px rgba(37,99,235,0.10);
+      --shadow-lg:      0 16px 56px rgba(37,99,235,0.18);
+    }
+
+    html, body {
+      min-height: 100%;
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ─────────────────────────────────────────
+       ANIMATED BACKGROUND
+    ───────────────────────────────────────── */
+    body {
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100dvh;
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Slow gradient mesh movement */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: -60%;
+      background:
+        radial-gradient(ellipse 60% 50% at 20% 30%, rgba(37,99,235,0.13) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 60% at 80% 70%, rgba(96,165,250,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 40% at 50% 90%, rgba(29,78,216,0.08) 0%, transparent 60%);
+      animation: gradientDrift 12s ease-in-out infinite alternate;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    @keyframes gradientDrift {
+      0%   { transform: translate(0, 0) scale(1); }
+      33%  { transform: translate(3%, 2%) scale(1.03); }
+      66%  { transform: translate(-2%, 4%) scale(1.015); }
+      100% { transform: translate(1%, -2%) scale(1.04); }
+    }
+
+    /* ─────────────────────────────────────────
+       OUTER WRAPPER — page load animation
+    ───────────────────────────────────────── */
+    .page-wrapper {
+      width: 100%;
+      max-width: 460px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      position: relative;
+      z-index: 1;
+      animation: pageRise 0.7s cubic-bezier(0.22,1,0.36,1) both;
+    }
+
+    @keyframes pageRise {
+      from { opacity: 0; transform: translateY(32px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─────────────────────────────────────────
+       LOGO BAR
+    ───────────────────────────────────────── */
+    .logo-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 4px;
+    }
+    .logo-badge {
+      width: 38px; height: 38px;
+      background: linear-gradient(135deg, var(--primary), #60A5FA);
+      border-radius: 11px;
+      display: flex; align-items: center; justify-content: center;
+      color: white;
+      font-family: 'Sora', sans-serif;
+      font-weight: 800; font-size: 14px;
+      letter-spacing: -0.5px;
+      box-shadow: 0 4px 14px rgba(37,99,235,0.28);
+    }
+    .logo-name {
+      font-family: 'Sora', sans-serif;
+      font-weight: 700; font-size: 15px;
+      color: var(--primary); letter-spacing: -0.2px;
+    }
+
+    /* ─────────────────────────────────────────
+       CARD
+    ───────────────────────────────────────── */
+    .key-box {
+      width: 100%;
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 44px 44px 40px;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid rgba(37,99,235,0.07);
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .key-box:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 22px 64px rgba(37,99,235,0.22);
+    }
+
+    /* ─────────────────────────────────────────
+       LOCK ICON
+    ───────────────────────────────────────── */
+    .lock-wrap {
+      width: 76px; height: 76px;
+      background: linear-gradient(135deg, var(--primary), #1E40AF);
+      border-radius: 22px;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 24px;
+      box-shadow: 0 8px 28px rgba(37,99,235,0.32), 0 0 0 6px rgba(37,99,235,0.10);
+      transition: background 0.5s ease, box-shadow 0.5s ease;
+      position: relative;
+    }
+    .lock-wrap.unlocked {
+      background: linear-gradient(135deg, var(--success), #047857);
+      box-shadow: 0 8px 28px rgba(5,150,105,0.35), 0 0 0 6px rgba(5,150,105,0.12);
+    }
+    .lock-icon {
+      color: white; font-size: 30px;
+      transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .lock-icon.hidden { opacity: 0; transform: scale(0.4) rotate(20deg); }
+
+    /* ─────────────────────────────────────────
+       TEXT
+    ───────────────────────────────────────── */
+    .card-title {
+      font-family: 'Sora', sans-serif;
+      font-size: 22px; font-weight: 800;
+      color: var(--text); letter-spacing: -0.4px;
+      margin-bottom: 8px;
+    }
+    .card-subtitle {
+      font-size: 14px; color: var(--muted);
+      line-height: 1.6; max-width: 320px; margin: 0 auto;
+    }
+
+    /* ─────────────────────────────────────────
+       INPUT WRAPPER
+    ───────────────────────────────────────── */
+    .input-wrap {
+      position: relative;
+      margin-top: 28px;
+    }
+    .input-icon {
+      position: absolute;
+      left: 16px; top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted); font-size: 14px;
+      pointer-events: none;
+      transition: color 0.2s;
+      z-index: 1;
+    }
+
+    #keyInput {
+      width: 100%;
+      padding: 15px 16px 15px 44px;
+      border: 2px solid var(--border);
+      border-radius: 13px;
+      font-family: 'Sora', sans-serif;
+      font-size: 15px; font-weight: 600;
+      color: var(--text);
+      background: var(--bg);
+      outline: none;
+      letter-spacing: 2px;
+      text-align: center;
+      padding-left: 44px;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    }
+    #keyInput::placeholder {
+      color: #CBD5E1; font-weight: 400; letter-spacing: 0;
+    }
+    #keyInput:focus {
+      border-color: var(--primary);
+      background: white;
+      box-shadow: 0 0 0 4px rgba(37,99,235,0.14);
+    }
+    #keyInput:focus + .input-icon { color: var(--primary); }
+
+    /* Input states */
+    #keyInput.input-success {
+      border-color: var(--success);
+      background: white;
+      box-shadow: 0 0 0 4px rgba(5,150,105,0.14);
+    }
+    #keyInput.input-error {
+      border-color: var(--danger);
+      background: white;
+      box-shadow: 0 0 0 4px rgba(220,38,38,0.13);
+      animation: shake 0.45s cubic-bezier(0.36,0.07,0.19,0.97) both;
+    }
+
+    @keyframes shake {
+      10%, 90%  { transform: translateX(-3px); }
+      20%, 80%  { transform: translateX(5px); }
+      30%, 50%, 70% { transform: translateX(-6px); }
+      40%, 60%  { transform: translateX(6px); }
+      100%      { transform: translateX(0); }
+    }
+
+    /* ─────────────────────────────────────────
+       FEEDBACK MESSAGE
+    ───────────────────────────────────────── */
+    .feedback {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      margin-top: 12px;
+      font-family: 'Sora', sans-serif;
+      font-size: 13px; font-weight: 600;
+      border-radius: 10px;
+      padding: 10px 14px;
+      animation: feedbackIn 0.3s ease both;
+    }
+    .feedback.show { display: flex; }
+
+    @keyframes feedbackIn {
+      from { opacity: 0; transform: translateY(-6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .feedback.success {
+      background: var(--success-light);
+      color: #065F46;
+      border: 1px solid var(--success-border);
+    }
+    .feedback.error {
+      background: var(--danger-light);
+      color: #7F1D1D;
+      border: 1px solid var(--danger-border);
+    }
+
+    /* ─────────────────────────────────────────
+       BUTTON
+    ───────────────────────────────────────── */
+    #verifyBtn {
+      width: 100%;
+      margin-top: 18px;
+      padding: 15px 24px;
+      background: linear-gradient(135deg, var(--primary), #1E40AF);
+      color: white;
+      border: none;
+      border-radius: 13px;
+      font-family: 'Sora', sans-serif;
+      font-size: 15px; font-weight: 700;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      box-shadow: 0 6px 24px rgba(37,99,235,0.32);
+      transition: background 0.22s ease, transform 0.15s ease, box-shadow 0.22s ease, opacity 0.2s;
+      letter-spacing: -0.1px;
+    }
+    #verifyBtn:hover:not(:disabled) {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary-deep));
+      box-shadow: 0 10px 32px rgba(37,99,235,0.42);
+      transform: translateY(-2px);
+    }
+    #verifyBtn:active:not(:disabled) {
+      transform: scale(0.97);
+      box-shadow: 0 4px 16px rgba(37,99,235,0.28);
+    }
+    #verifyBtn:disabled {
+      opacity: 0.72;
+      cursor: not-allowed;
+      transform: none;
+    }
+    #verifyBtn.success-btn {
+      background: linear-gradient(135deg, var(--success), #047857);
+      box-shadow: 0 6px 24px rgba(5,150,105,0.32);
+    }
+
+    /* Spinner */
+    .spinner {
+      width: 17px; height: 17px;
+      border: 2.5px solid rgba(255,255,255,0.35);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      display: none;
+      flex-shrink: 0;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* ─────────────────────────────────────────
+       DIVIDER / HINT
+    ───────────────────────────────────────── */
+    .help-text {
+      margin-top: 22px;
+      padding-top: 18px;
+      border-top: 1px solid var(--border);
+      font-size: 13px; color: var(--muted);
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+    }
+    .help-text i { color: var(--primary); font-size: 13px; }
+    .help-text a {
+      color: var(--primary); font-weight: 600; text-decoration: none;
+      transition: color 0.15s;
+    }
+    .help-text a:hover { color: var(--primary-dark); text-decoration: underline; }
+
+    /* ─────────────────────────────────────────
+       FOOTER
+    ───────────────────────────────────────── */
+    .page-footer {
+      font-size: 12px; color: var(--muted);
+      text-align: center; margin-top: 4px;
+    }
+    .page-footer strong { color: var(--primary); font-weight: 600; }
+
+    /* ─────────────────────────────────────────
+       RESPONSIVE
+    ───────────────────────────────────────── */
+    @media (max-width: 500px) {
+      .key-box { padding: 32px 22px 28px; }
+      .card-title { font-size: 20px; }
+      .lock-wrap { width: 64px; height: 64px; border-radius: 18px; }
+      .lock-icon { font-size: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page-wrapper">
+
+  <!-- LOGO -->
+  <div class="logo-bar">
+    <div class="logo-badge">VTX</div>
+    <span class="logo-name">VTX Campus</span>
+  </div>
+
+  <!-- CARD -->
+  <div class="key-box">
+
+    <!-- LOCK ICON -->
+    <div class="lock-wrap" id="lockWrap">
+      <i class="fa-solid fa-lock lock-icon" id="lockIcon"></i>
+    </div>
+
+    <!-- HEADING -->
+    <h2 class="card-title">Enter Enrollment Key</h2>
+    <p class="card-subtitle">Please enter your course enrollment key to unlock access and continue learning.</p>
+
+    <!-- INPUT -->
+    <div class="input-wrap">
+      <i class="fa-solid fa-key input-icon"></i>
+      <input
+        type="text"
+        id="keyInput"
+        placeholder="e.g. SMM2026"
+        autocomplete="off"
+        spellcheck="false"
+      />
+    </div>
+
+    <!-- FEEDBACK -->
+    <div class="feedback" id="feedback">
+      <i class="fa-solid fa-circle-info" id="feedbackIcon"></i>
+      <span id="feedbackMsg"></span>
+    </div>
+
+    <!-- BUTTON -->
+    <button id="verifyBtn" onclick="checkKey()">
+      <div class="spinner" id="spinner"></div>
+      <i class="fa-solid fa-shield-halved" id="btnIcon"></i>
+      <span id="btnText">Verify Key</span>
+    </button>
+
+    <!-- HELP -->
+    <div class="help-text">
+      <i class="fa-solid fa-circle-question"></i>
+      Don't have a key? <a href="#">Contact support</a>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="page-footer">
+    <strong>VTX Campus</strong> &copy; 2026 &mdash; Secure Access Portal
+  </div>
+
+</div>
+
+<script>
+  /* ─────────────────────────────────────────
+     ENHANCED UI LAYER
+     (wraps original checkKey logic — does NOT change key validation)
+  ───────────────────────────────────────── */
+
+  const input      = document.getElementById('keyInput');
+  const btn        = document.getElementById('verifyBtn');
+  const spinner    = document.getElementById('spinner');
+  const btnIcon    = document.getElementById('btnIcon');
+  const btnText    = document.getElementById('btnText');
+  const feedback   = document.getElementById('feedback');
+  const feedbackIcon = document.getElementById('feedbackIcon');
+  const feedbackMsg  = document.getElementById('feedbackMsg');
+  const lockWrap   = document.getElementById('lockWrap');
+  const lockIcon   = document.getElementById('lockIcon');
+
+  /* Auto-uppercase as user types */
+  input.addEventListener('input', () => {
+    const pos = input.selectionStart;
+    input.value = input.value.toUpperCase();
+    input.setSelectionRange(pos, pos);
+    resetFeedback();
+  });
+
+  /* Submit on Enter key */
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') checkKey();
+  });
+
+  /* Reset feedback UI */
+  function resetFeedback() {
+    input.classList.remove('input-success','input-error');
+    feedback.classList.remove('show','success','error');
+    btn.classList.remove('success-btn');
+    lockWrap.classList.remove('unlocked');
+    lockIcon.className = 'fa-solid fa-lock lock-icon';
+  }
+
+  /* Show loading state */
+  function setLoading(on) {
+    btn.disabled = on;
+    spinner.style.display = on ? 'block' : 'none';
+    btnIcon.style.display = on ? 'none' : 'inline-block';
+    btnText.textContent   = on ? 'Verifying...' : 'Verify Key';
+  }
+
+  /* Show success UI */
+  function showSuccess() {
+    input.classList.add('input-success');
+
+    feedback.className = 'feedback show success';
+    feedbackIcon.className = 'fa-solid fa-circle-check';
+    feedbackMsg.textContent = 'Key accepted! Redirecting you now...';
+
+    btn.classList.add('success-btn');
+    btnIcon.className  = 'fa-solid fa-circle-check';
+    btnText.textContent = 'Access Granted';
+
+    /* Lock → Unlock transition */
+    lockIcon.classList.add('hidden');
+    setTimeout(() => {
+      lockIcon.className = 'fa-solid fa-lock-open lock-icon';
+      lockWrap.classList.add('unlocked');
+      lockIcon.classList.remove('hidden');
+    }, 280);
+  }
+
+  /* Show error UI */
+  function showError(msg) {
+    input.classList.add('input-error');
+
+    feedback.className = 'feedback show error';
+    feedbackIcon.className = 'fa-solid fa-circle-xmark';
+    feedbackMsg.textContent = msg || 'Invalid enrollment key. Please try again.';
+
+    /* Re-enable button after shake */
+    setTimeout(() => {
+      setLoading(false);
+      btnIcon.className = 'fa-solid fa-shield-halved';
+    }, 460);
+  }
+
+  /* ── ENHANCED verifyKey (called by original checkKey) ── */
+  function verifyKey(course, inputVal) {
+    resetFeedback();
+    setLoading(true);
+
+    /* Simulate brief verification delay for UX */
+    setTimeout(() => {
+      if (!course) {
+        showError('No course specified in the URL.');
+        return;
+      }
+
+      /* ── ORIGINAL VALIDATION LOGIC — preserved exactly ── */
+      if (inputVal === keys[course]) {
+        localStorage.setItem(`access_${course}`, 'true');
+        showSuccess();
+        /* 1-second delay before redirect */
+        setTimeout(() => {
+          window.location.href = course + '.html';
+        }, 1200);
+      } else {
+        showError('Invalid enrollment key. Please try again.');
+      }
+    }, 800);
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Receipt</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f0f4f8;
+    }
+
+    .container {
+      max-width: 600px;
+      background: #fff;
+      padding: 25px;
+      margin: auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #007bff;
+      margin-bottom: 25px;
+    }
+
+    input, select, label {
+      display: block;
+      width: 100%;
+      margin-bottom: 12px;
+    }
+
+    input, select {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    button {
+      padding: 12px;
+      background: linear-gradient(90deg, #007bff, #00c6ff);
+      border: none;
+      color: white;
+      font-size: 16px;
+      width: 100%;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: linear-gradient(90deg, #0056b3, #00aaff);
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 12px;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Generate Student Receipt</h2>
+
+    <label>Student Name</label>
+    <input id="studentName" type="text" placeholder="Enter full name" />
+
+    <label>Student ID</label>
+    <input id="studentID" type="text" placeholder="e.g. VSX1005" />
+
+    <label>Mobile Number</label>
+    <input id="mobile" type="text" placeholder="+2547..." />
+
+    <label>Email</label>
+    <input id="email" type="email" placeholder="example@gmail.com" />
+
+    <label>Course Type</label>
+    <select id="courseType">
+      <option value="Certificate">Certificate</option>
+      <option value="Diploma">Diploma</option>
+    </select>
+
+    <label>Course Name</label>
+    <input id="courseName" type="text" placeholder="e.g. Graphic Design" />
+
+    <label>Amount Paid (Ksh)</label>
+    <input id="amountPaid" type="number" placeholder="e.g. 2500" />
+
+    <label>Balance Remaining (Ksh)</label>
+    <input id="balance" type="number" placeholder="e.g. 2500" />
+
+    <button onclick="generatePDF()">Download Receipt PDF</button>
+
+    <div class="footer">VersaTechX Campus | Empowering Africa, One Skill at a Time</div>
+  </div>
+
+  <script>
+    async function generatePDF() {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+
+      const name = document.getElementById("studentName").value;
+      const id = document.getElementById("studentID").value;
+      const mobile = document.getElementById("mobile").value;
+      const email = document.getElementById("email").value;
+      const amount = document.getElementById("amountPaid").value;
+      const balance = document.getElementById("balance").value;
+      const courseType = document.getElementById("courseType").value;
+      const courseName = document.getElementById("courseName").value;
+
+      // Header
+      doc.setFillColor(0, 123, 255); // Blue bar
+      doc.rect(0, 0, 210, 20, 'F');
+      doc.setTextColor(255, 255, 255);
+      doc.setFontSize(14);
+      doc.text("VersaTechX Campus", 105, 12, null, null, "center");
+
+      // Subheading
+      doc.setFillColor(230, 240, 255);
+      doc.roundedRect(15, 25, 180, 12, 3, 3, 'F');
+      doc.setTextColor(0, 123, 255);
+      doc.setFontSize(12);
+      doc.text("STUDENT RECEIPT", 105, 34, null, null, "center");
+
+      doc.setTextColor(0);
+      doc.setFontSize(10);
+      doc.text(`Date: ${new Date().toLocaleDateString()}`, 15, 45);
+
+      // Student Details
+      doc.setFillColor(240, 248, 255);
+      doc.roundedRect(15, 50, 180, 50, 3, 3, 'F');
+      doc.text(`Name: ${name}`, 20, 60);
+      doc.text(`Student ID: ${id}`, 20, 68);
+      doc.text(`Mobile: ${mobile}`, 20, 76);
+      doc.text(`Email: ${email}`, 20, 84);
+
+      // Course Details
+      doc.setFillColor(230, 240, 255);
+      doc.roundedRect(15, 105, 180, 20, 3, 3, 'F');
+      doc.text(`Course Type: ${courseType}`, 20, 115);
+      doc.text(`Course Name: ${courseName}`, 20, 122);
+
+      // Payment Info
+      doc.setFillColor(220, 235, 255);
+      doc.roundedRect(15, 135, 180, 25, 3, 3, 'F');
+      doc.text("Payment Summary", 20, 143);
+      doc.text(`Amount Paid: Ksh ${amount}`, 20, 150);
+      doc.text(`Balance Remaining: Ksh ${balance}`, 20, 157);
+
+      // Footer
+      doc.setTextColor(100);
+      doc.setFontSize(9);
+      doc.text("Thank you for enrolling at VersaTechX Campus!", 15, 172);
+      doc.text("For support, contact: 0712165017", 15, 178);
+
+      doc.save(`${name.replace(/\s+/g, "_")}_Receipt.pdf`);
+    }
+  </script>
+</body>
+</html>

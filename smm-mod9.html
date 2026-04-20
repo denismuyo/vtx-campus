@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>VTX Campus – Social Media Management Mastery</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --primary: #2563EB;
+    --primary-light: #DBEAFE;
+    --primary-dark: #1D4ED8;
+    --bg: #EFF6FF;
+    --card: #ffffff;
+    --text: #111827;
+    --muted: #6B7280;
+    --border: #E5E7EB;
+    --success: #059669;
+    --danger: #DC2626;
+    --success-bg: #D1FAE5;
+    --danger-bg: #FEE2E2;
+    --radius: 16px;
+    --shadow: 0 4px 24px rgba(37,99,235,0.08);
+    --shadow-lg: 0 8px 40px rgba(37,99,235,0.14);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.7;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 2px 12px rgba(37,99,235,0.06);
+  }
+  .header-inner {
+    max-width: 860px; margin: 0 auto;
+    padding: 18px 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px; flex-wrap: wrap;
+  }
+  .logo-area { display: flex; align-items: center; gap: 12px; }
+  .logo-badge {
+    width: 42px; height: 42px;
+    background: linear-gradient(135deg, var(--primary), #60A5FA);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-family: 'Sora', sans-serif; font-weight: 800; font-size: 15px;
+    letter-spacing: -0.5px;
+  }
+  .logo-text { display: flex; flex-direction: column; }
+  .logo-text span:first-child {
+    font-family: 'Sora', sans-serif; font-weight: 700; font-size: 15px;
+    color: var(--primary); letter-spacing: -0.3px;
+  }
+  .logo-text span:last-child { font-size: 12px; color: var(--muted); font-weight: 400; }
+
+  .progress-pill {
+    background: var(--primary-light); color: var(--primary-dark);
+    font-family: 'Sora', sans-serif; font-weight: 600; font-size: 13px;
+    padding: 6px 14px; border-radius: 999px; white-space: nowrap;
+  }
+  .progress-bar-wrap {
+    width: 100%; max-width: 860px; margin: 0 auto;
+    padding: 0 24px 12px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .progress-bar-track {
+    flex: 1; height: 5px; background: var(--primary-light);
+    border-radius: 999px; overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%; width: 100%; /* 9/9 */
+    background: linear-gradient(90deg, var(--primary), #60A5FA);
+    border-radius: 999px; transition: width 0.6s ease;
+  }
+  .progress-label { font-size: 11px; color: var(--muted); white-space: nowrap; }
+
+  /* ── HERO ── */
+  .module-hero { max-width: 860px; margin: 36px auto 0; padding: 0 24px; }
+  .module-hero-card {
+    background: linear-gradient(135deg, var(--primary) 0%, #1E40AF 60%, #1D4ED8 100%);
+    border-radius: 20px; padding: 40px 44px;
+    color: white; position: relative; overflow: hidden;
+    box-shadow: 0 8px 40px rgba(37,99,235,0.30);
+  }
+  .module-hero-card::before {
+    content: ''; position: absolute; top: -40px; right: -40px;
+    width: 200px; height: 200px;
+    background: rgba(255,255,255,0.06); border-radius: 50%;
+  }
+  .module-hero-card::after {
+    content: ''; position: absolute; bottom: -60px; right: 60px;
+    width: 160px; height: 160px;
+    background: rgba(255,255,255,0.04); border-radius: 50%;
+  }
+  .module-tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.25);
+    padding: 4px 12px; border-radius: 999px;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.5px;
+    text-transform: uppercase; margin-bottom: 14px;
+  }
+  .module-hero-card h1 {
+    font-family: 'Sora', sans-serif; font-weight: 800;
+    font-size: clamp(22px, 4vw, 32px);
+    line-height: 1.2; letter-spacing: -0.5px; margin-bottom: 10px;
+  }
+  .module-hero-card p { font-size: 15px; opacity: 0.85; max-width: 520px; line-height: 1.6; }
+  .hero-stats { display: flex; gap: 24px; margin-top: 24px; flex-wrap: wrap; }
+  .hero-stat {
+    display: flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,0.12); border-radius: 10px; padding: 8px 16px;
+  }
+  .hero-stat i { opacity: 0.9; font-size: 14px; }
+  .hero-stat span { font-size: 13px; font-weight: 500; }
+
+  /* ── PAGE BODY ── */
+  .page-body {
+    max-width: 860px; margin: 32px auto 60px; padding: 0 24px;
+    display: flex; flex-direction: column; gap: 28px;
+  }
+
+  /* ── CARD ── */
+  .card {
+    background: var(--card); border-radius: var(--radius);
+    box-shadow: var(--shadow); padding: 36px 40px;
+    border: 1px solid rgba(37,99,235,0.06); transition: box-shadow 0.2s;
+  }
+  .card:hover { box-shadow: var(--shadow-lg); }
+
+  .section-label { display: flex; align-items: center; gap: 10px; margin-bottom: 22px; }
+  .section-label-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: var(--primary-light);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; color: var(--primary); font-size: 16px;
+  }
+  .section-label h2 {
+    font-family: 'Sora', sans-serif; font-size: 20px;
+    font-weight: 700; color: var(--text); letter-spacing: -0.3px;
+  }
+
+  /* Typography */
+  .content-body h3 {
+    font-family: 'Sora', sans-serif; font-size: 17px; font-weight: 700;
+    color: var(--primary-dark); margin: 26px 0 10px; letter-spacing: -0.2px;
+  }
+  .content-body h4 {
+    font-family: 'Sora', sans-serif; font-size: 15px; font-weight: 600;
+    color: var(--text); margin: 18px 0 8px;
+  }
+  .content-body p { font-size: 15px; color: #374151; margin-bottom: 12px; }
+  .content-body ul {
+    list-style: none; padding: 0;
+    display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px;
+  }
+  .content-body ul li {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 15px; color: #374151;
+  }
+  .content-body ul li::before {
+    content: ''; width: 8px; height: 8px; border-radius: 50%;
+    background: var(--primary); margin-top: 7px; flex-shrink: 0;
+  }
+
+  .insight-box {
+    background: linear-gradient(135deg, var(--primary-light), #EFF6FF);
+    border-left: 4px solid var(--primary);
+    border-radius: 0 12px 12px 0;
+    padding: 14px 18px; margin: 18px 0;
+    font-size: 14px; color: var(--primary-dark); font-weight: 500;
+  }
+  .insight-box strong {
+    display: block; margin-bottom: 4px; font-size: 12px;
+    text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.7;
+  }
+
+  /* Numbered list */
+  .roles-list { display: flex; flex-direction: column; gap: 12px; margin: 18px 0; }
+  .role-item {
+    display: flex; align-items: flex-start; gap: 14px;
+    background: var(--bg); border-radius: 12px; padding: 14px 16px;
+    border: 1px solid var(--border); transition: border-color 0.2s;
+  }
+  .role-item:hover { border-color: #BFDBFE; }
+  .role-num {
+    width: 32px; height: 32px; border-radius: 10px;
+    background: var(--primary-light); color: var(--primary-dark);
+    font-family: 'Sora', sans-serif; font-weight: 700; font-size: 14px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .role-content h4 { font-family: 'Sora', sans-serif; font-size: 14px; font-weight: 700; margin-bottom: 3px; }
+  .role-content p { font-size: 13.5px; color: var(--muted); margin: 0; }
+
+  /* Platform grid */
+  .platform-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px; margin: 18px 0;
+  }
+  .platform-card {
+    border: 1.5px solid var(--border); border-radius: 14px; padding: 18px;
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s; cursor: default;
+  }
+  .platform-card:hover { border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 16px rgba(37,99,235,0.10); }
+  .platform-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 10px; font-size: 18px; color: var(--primary);
+  }
+  .platform-card h4 { font-family: 'Sora', sans-serif; font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+  .platform-card p { font-size: 12.5px; color: var(--muted); line-height: 1.5; margin: 0; }
+  .platform-tag {
+    display: inline-block; margin-top: 8px;
+    background: var(--bg); border: 1px solid var(--border);
+    font-size: 11px; color: var(--muted); padding: 2px 8px;
+    border-radius: 999px; font-weight: 500;
+  }
+
+  /* Benefits grid */
+  .benefits-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px; margin: 18px 0;
+  }
+  .benefit-item {
+    background: var(--bg); border-radius: 12px; padding: 16px 14px; text-align: center;
+    border: 1px solid var(--border); transition: background 0.2s;
+  }
+  .benefit-item:hover { background: var(--primary-light); border-color: #BFDBFE; }
+  .benefit-icon { font-size: 20px; color: var(--primary); margin-bottom: 8px; }
+  .benefit-item h4 { font-family: 'Sora', sans-serif; font-size: 13px; font-weight: 600; color: var(--text); }
+  .benefit-item p { font-size: 12px; color: var(--muted); margin: 4px 0 0; line-height: 1.4; }
+
+  /* Pricing cards */
+  .pricing-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px; margin: 18px 0;
+  }
+  .pricing-card {
+    border: 1.5px solid var(--border); border-radius: 14px; padding: 22px 18px;
+    text-align: center; transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    cursor: default;
+  }
+  .pricing-card:hover { border-color: var(--primary); transform: translateY(-3px); box-shadow: 0 6px 20px rgba(37,99,235,0.12); }
+  .pricing-card-icon {
+    width: 46px; height: 46px; border-radius: 14px;
+    background: var(--primary-light); color: var(--primary);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; margin: 0 auto 12px;
+  }
+  .pricing-card h4 { font-family: 'Sora', sans-serif; font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+  .pricing-card p { font-size: 13px; color: var(--muted); line-height: 1.5; margin: 0; }
+  .pricing-card .pricing-tag {
+    display: inline-block; margin-top: 12px;
+    background: var(--primary); color: white;
+    font-size: 11px; font-weight: 700; padding: 3px 12px;
+    border-radius: 999px; letter-spacing: 0.4px;
+  }
+
+  /* Professionalism list */
+  .behavior-list { display: flex; flex-direction: column; gap: 10px; margin: 18px 0; }
+  .behavior-item {
+    display: flex; align-items: center; gap: 14px;
+    background: var(--bg); border-radius: 12px; padding: 12px 16px;
+    border: 1px solid var(--border);
+  }
+  .behavior-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--primary); flex-shrink: 0; }
+  .behavior-item p { font-size: 14.5px; color: #374151; margin: 0; }
+
+  /* Case study */
+  .case-study-box {
+    background: linear-gradient(135deg, #F0FDF4, #DCFCE7);
+    border: 1.5px solid #BBF7D0; border-radius: 14px; padding: 24px;
+  }
+  .case-study-box h4 { font-family: 'Sora', sans-serif; font-size: 15px; font-weight: 700; color: #065F46; margin-bottom: 12px; }
+  .case-study-box p, .case-study-box li { font-size: 14px; color: #047857; }
+  .case-study-box ul li::before { background: #059669; }
+  .case-study-lesson {
+    margin-top: 14px; background: #065F46; color: white;
+    border-radius: 10px; padding: 10px 14px; font-size: 13.5px;
+  }
+  .case-study-lesson strong { margin-right: 6px; }
+
+  /* Completion banner */
+  .completion-banner {
+    background: linear-gradient(135deg, #1E40AF, #2563EB, #60A5FA);
+    border-radius: 16px; padding: 36px 40px; text-align: center;
+    color: white; position: relative; overflow: hidden;
+  }
+  .completion-banner::before {
+    content: ''; position: absolute; top: -30px; right: -30px;
+    width: 160px; height: 160px;
+    background: rgba(255,255,255,0.06); border-radius: 50%;
+  }
+  .completion-banner i.banner-icon {
+    font-size: 44px; margin-bottom: 16px; display: block; opacity: 0.95;
+  }
+  .completion-banner h3 {
+    font-family: 'Sora', sans-serif; font-size: 22px; font-weight: 800;
+    margin-bottom: 10px; letter-spacing: -0.3px;
+  }
+  .completion-banner p {
+    font-size: 15px; opacity: 0.88; max-width: 480px;
+    margin: 0 auto; line-height: 1.6;
+  }
+
+  /* Checklist */
+  .checklist { display: flex; flex-direction: column; gap: 10px; }
+  .checklist-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 14px; background: var(--bg); border-radius: 10px;
+    border: 1px solid var(--border); font-size: 14px; font-weight: 500;
+    cursor: pointer; transition: background 0.15s, border-color 0.15s;
+    user-select: none;
+  }
+  .checklist-item:hover { background: var(--primary-light); border-color: #BFDBFE; }
+  .checklist-item input[type=checkbox] { accent-color: var(--primary); width: 16px; height: 16px; }
+  .checklist-item.checked { background: var(--primary-light); border-color: #93C5FD; color: var(--primary-dark); }
+
+  /* VIDEO */
+  .video-wrap {
+    position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;
+    border-radius: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.10);
+  }
+  .video-wrap iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+
+  /* Action Task */
+  .task-textarea {
+    width: 100%; min-height: 130px;
+    border: 2px solid var(--border); border-radius: 12px;
+    padding: 14px 16px; font-family: 'DM Sans', sans-serif; font-size: 14.5px;
+    color: var(--text); background: var(--bg); resize: vertical;
+    transition: border-color 0.2s, box-shadow 0.2s; outline: none; margin-top: 10px;
+  }
+  .task-textarea:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37,99,235,0.12); }
+  .save-btn {
+    margin-top: 12px; padding: 10px 24px;
+    background: var(--primary); color: white;
+    border: none; border-radius: 10px; font-family: 'Sora', sans-serif;
+    font-size: 14px; font-weight: 600; cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .save-btn:hover { background: var(--primary-dark); }
+  .save-btn:active { transform: scale(0.97); }
+  .save-msg { margin-top: 10px; font-size: 13px; color: var(--success); display: none; }
+
+  /* QUIZ */
+  .quiz-form { display: flex; flex-direction: column; gap: 24px; }
+  .quiz-q { display: flex; flex-direction: column; gap: 10px; }
+  .quiz-q-text {
+    font-family: 'Sora', sans-serif; font-weight: 600; font-size: 15px;
+    color: var(--text); line-height: 1.5;
+  }
+  .quiz-q-num {
+    display: inline-block; width: 26px; height: 26px; border-radius: 8px;
+    background: var(--primary-light); color: var(--primary-dark);
+    font-size: 12px; font-weight: 700; text-align: center; line-height: 26px;
+    margin-right: 8px; flex-shrink: 0;
+  }
+  .quiz-options { display: flex; flex-direction: column; gap: 8px; }
+  .quiz-option {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 16px; border-radius: 12px; border: 2px solid var(--border);
+    cursor: pointer; transition: all 0.15s; font-size: 14.5px; user-select: none;
+  }
+  .quiz-option:hover { border-color: var(--primary); background: var(--primary-light); }
+  .quiz-option input[type=radio] { accent-color: var(--primary); width: 16px; height: 16px; flex-shrink: 0; }
+  .quiz-option.correct { border-color: var(--success); background: var(--success-bg); color: #065F46; font-weight: 500; }
+  .quiz-option.incorrect { border-color: var(--danger); background: var(--danger-bg); color: #7F1D1D; }
+  .quiz-option.missed { border-color: var(--success); background: #F0FDF4; }
+
+  .quiz-submit-btn {
+    padding: 14px 32px; background: linear-gradient(135deg, var(--primary), #1D4ED8);
+    color: white; border: none; border-radius: 12px;
+    font-family: 'Sora', sans-serif; font-size: 15px; font-weight: 700;
+    cursor: pointer; box-shadow: 0 4px 14px rgba(37,99,235,0.30);
+    transition: transform 0.15s, box-shadow 0.15s;
+    align-self: flex-start; margin-top: 6px;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .quiz-submit-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(37,99,235,0.38); }
+  .quiz-submit-btn:active { transform: translateY(0); }
+  .quiz-submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+  .quiz-result {
+    display: none; margin-top: 20px; padding: 20px 24px;
+    border-radius: 14px; text-align: center; animation: fadeUp 0.4s ease;
+  }
+  .quiz-result.show { display: block; }
+  .quiz-result-score { font-family: 'Sora', sans-serif; font-size: 48px; font-weight: 800; line-height: 1; margin-bottom: 6px; }
+  .quiz-result-label { font-size: 15px; font-weight: 500; }
+  .quiz-result-msg { font-size: 14px; margin-top: 8px; opacity: 0.8; }
+  .result-excellent { background: var(--success-bg); color: #065F46; border: 2px solid #6EE7B7; }
+  .result-good      { background: #FFF7ED; color: #92400E; border: 2px solid #FCD34D; }
+  .result-improve   { background: var(--danger-bg); color: #7F1D1D; border: 2px solid #FCA5A5; }
+
+  /* REFLECTION */
+  .reflection-q { margin-bottom: 18px; }
+  .reflection-q label { display: block; font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+
+  /* NAVIGATION */
+  .module-nav {
+    max-width: 860px; margin: 0 auto 60px; padding: 0 24px;
+    display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  }
+  .nav-btn {
+    display: flex; align-items: center; gap: 8px;
+    padding: 12px 24px; border-radius: 12px;
+    font-family: 'Sora', sans-serif; font-size: 14px; font-weight: 600;
+    cursor: pointer; transition: all 0.15s; border: 2px solid transparent;
+    text-decoration: none; background: none;
+  }
+  .nav-btn-prev { background: var(--card); border-color: var(--border); color: var(--text); }
+  .nav-btn-prev:hover { border-color: var(--primary); color: var(--primary); }
+  .nav-btn-finish {
+    background: linear-gradient(135deg, var(--success), #047857);
+    color: white; box-shadow: 0 4px 14px rgba(5,150,105,0.30);
+    border-color: transparent;
+  }
+  .nav-btn-finish:hover { background: linear-gradient(135deg, #047857, #065F46); transform: translateX(2px); }
+  .nav-btn-center { font-size: 13px; color: var(--muted); }
+
+  /* FOOTER */
+  footer {
+    background: var(--card); border-top: 1px solid var(--border);
+    text-align: center; padding: 20px 24px; font-size: 13px; color: var(--muted);
+  }
+  footer span { color: var(--primary); font-weight: 600; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .card { animation: fadeUp 0.5s ease both; }
+
+  @media (max-width: 640px) {
+    .card { padding: 24px 20px; }
+    .module-hero-card { padding: 28px 22px; }
+    .completion-banner { padding: 28px 22px; }
+    .hero-stats { gap: 10px; }
+    .hero-stat { padding: 6px 10px; }
+    .module-nav { flex-direction: column; }
+    .nav-btn { width: 100%; justify-content: center; }
+    .platform-grid { grid-template-columns: 1fr 1fr; }
+    .pricing-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 420px) {
+    .platform-grid { grid-template-columns: 1fr; }
+    .benefits-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-inner">
+    <div class="logo-area">
+      <div class="logo-badge">VTX</div>
+      <div class="logo-text">
+        <span>VTX Campus</span>
+        <span>Social Media Management Mastery</span>
+      </div>
+    </div>
+    <div class="progress-pill">
+      <i class="fa-solid fa-layer-group" style="margin-right:6px;"></i>Module 9 of 9
+    </div>
+  </div>
+  <div class="progress-bar-wrap">
+    <div class="progress-bar-track"><div class="progress-bar-fill"></div></div>
+    <span class="progress-label">100% complete</span>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="module-hero">
+  <div class="module-hero-card">
+    <div class="module-tag">Final Module</div>
+    <h1>
+      <i class="fa-solid fa-sack-dollar" style="margin-right:10px;opacity:0.85;"></i>Monetization &amp; Career Opportunities
+    </h1>
+    <p>Turn your social media management skills into real income and career opportunities — understand earning paths, how to attract clients, how to price your services, and how to present yourself professionally.</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <i class="fa-regular fa-clock"></i>
+        <span>~20 min read</span>
+      </div>
+      <div class="hero-stat">
+        <i class="fa-solid fa-circle-check"></i>
+        <span>5-question quiz</span>
+      </div>
+      <div class="hero-stat">
+        <i class="fa-solid fa-video"></i>
+        <span>Video lesson</span>
+      </div>
+      <div class="hero-stat">
+        <i class="fa-solid fa-trophy"></i>
+        <span>Final module</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE BODY -->
+<main class="page-body">
+
+  <!-- MODULE OVERVIEW -->
+  <div class="card">
+    <div class="section-label">
+      <div class="section-label-icon"><i class="fa-solid fa-circle-info"></i></div>
+      <h2>Module Overview</h2>
+    </div>
+    <div class="content-body">
+      <p>This module focuses on how to turn social media management skills into income and career opportunities. Learners will understand different earning paths, how to get clients, and how to position themselves professionally.</p>
+      <h3>By the end of this module, you will:</h3>
+      <ul>
+        <li>Understand the different ways to earn from social media management</li>
+        <li>Know how to attract your first client or job opportunity</li>
+        <li>Be able to price your services confidently</li>
+        <li>Build a basic professional profile and portfolio</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- CAREER PATHS -->
+  <div class="card">
+    <div class="section-label">
+      <div class="section-label-icon"><i class="fa-solid fa-road"></i></div>
+      <h2>Career Paths in Social Media Management</h2>
+    </div>
+    <div class="content-body">
+      <p>Social media management is a flexible skill that opens multiple career paths. You are not limited to one route — your path depends on your goals, working style, and ambition.</p>
+      <div class="platform-grid">
+        <div class="platform-card">
+          <div class="platform-icon" style="background:#EFF6FF;">
+            <i class="fa-solid fa-person-running"></i>
+          </div>
+          <h4>Freelancer</h4>
+          <p>Work independently and manage accounts for multiple clients on your own terms.</p>
+          <span class="platform-tag">Most flexible</span>
+        </div>
+        <div class="platform-card">
+          <div class="platform-icon" style="background:#F0FDF4;">
+            <i class="fa-solid fa-building"></i>
+          </div>
+          <h4>In-House Manager</h4>
+          <p>Work directly for a company, managing their social media accounts as a full-time employee.</p>
+          <span class="platform-tag">Stable income</span>
+        </div>
+        <div class="platform-card">
+          <div class="platform-icon" style="background:#FFF7ED;">
+            <i class="fa-solid fa-users"></i>
+          </div>
+          <h4>Agency Work</h4>
+          <p>Work as part of a team in a digital agency, handling multiple brand accounts simultaneously.</p>
+          <span class="platform-tag">Team environment</span>
+        </div>
+        <div class="platform-card">
+          <div class="platform-icon" style="background:#F5F3FF;">
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <h4>Personal Brand Manager</h4>
+          <p>Manage content and strategy for influencers, public figures, or thought leaders.</p>
+          <span class="platform-tag">High demand</span>
+        </div>
+      </div>
+      <div class="insight-box">
+        <strong>Key Insight</strong>
+        Social media management is a flexible skill with multiple career paths — you can evolve from one to another as your experience and reputation grow.
+      </div>
+    </div>
+  </div>
+
+  <!-- WAYS TO MAKE MONEY -->
+  <div class="card">
+    <div class="section-label">
+      <div class="section-label-icon"><i class="fa-solid fa-coins"></i></div>
+      <h2>Ways to Make Money</h2>
+    </div>
+    <div class="content-body">
+      <p>There are multiple income streams available to social media managers. You can start with one and expand your offerings as your skills and client base grow.</p>
+      <div class="benefits-grid">
+        <div class="benefit-item">
+          <div class="benefit-icon"><i class="fa-solid fa-calendar-check"></i></div>
+          <h4>Account Management</h4>
+          <p>Monthly retainer to fully manage a client's social media presence.</p>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon"><i class="fa-solid fa-pen-ruler"></i></div>
+          <h4>Content Creation</h4>
+          <p>Create graphics, captions, and content packages for brands.</p>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon"><i class="fa-solid fa-briefcase"></i></div>
+          <h4>Strategy Consulting</h4>
+          <p>Advise businesses on their social media strategy for a consulting fee.</p>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+          <h4>Page Audits</h4>
+          <p>Review and analyze a brand's existing pages and deliver a detailed improvement report.</p>
+        </div>
+      </div>
+      <div class="case-study-box" style="background:linear-gradient(135deg,#EFF6FF,#DBEAFE);border-color:#BFDBFE;">
+        <h4 style="color:#1E40AF;">
+          <i class="fa-solid fa-lightbulb" style="margin-right:8px;"></i>Starting Out
+        </h4>
+        <p style="color:#1D4ED8;">A beginner may start with just one or two clients on a basic monthly management package, then expand into content creation and consulting services as their portfolio and confidence grow.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- GETTING YOUR FIRST CLIENT -->
+  <div class="card">
+    <div class="section-label">
+      <div class="section-label-icon"><i class="fa-solid fa-handshake"></i></div>
+      <h2>Getting Your First Client</h2>
+    </div>
+    <div class="content-body">
+      <p>Your first client will not come to you — you have to go to them. These four methods are the most effective ways to land your first paid opportunity.</p>
+      <div class="roles-list">
+        <div class="role-item">
+          <div class="role-num">1</div>
+          <div class="role-content">
+            <h4>Reach Out Directly</h4>
+            <p>Identify small businesses in your area or online whose social media could be improved — then contact them and offer your services with a clear value proposition.</p>
+          </div>
+        </div>
+        <div class="role-item">
+          <div class="role-num">2</div>
+          <div class="role-content">
+            <h4>Use Social Media</h4>
+            <p>Demonstrate your skills publicly by posting content that showcases your knowledge — potential clients who see your work will reach out to you.</p>
+          </div>
+        </div>
+        <div class="role-item">
+          <div class="role-num">3</div>
+          <div class="role-content">
+            <h4>Referrals</h4>
+            <p>Tell your existing network what you do — friends, family, and connections often know businesses that need help and can make introductions.</p>
+          </div>
+        </div>
+        <div class="role-item">
+          <div class="role-num">4</div>
+          <div class="role-content">
+            <h4>Freelance Platforms</h4>
+            <p>Create profiles on freelance platforms and apply to relevant social media management jobs and projects being posted daily.</p>
+          </div>
+        </div>
+      </div>
+      <div class="insight-box">
+        <strong>Key Insight</strong>
+        Your first client often comes from consistent, deliberate effort — not luck. Show up, reach out, and follow through.
+      </div>
+    </div>
+  </div>
+
+  <!-- BUILDING A PORTFOLIO -->
+  <div class="card">
+    <div class="section-label">
+      <div class="section-label-icon"><i class="fa-solid fa-folder-open"></i></div>
+      <h2>Building a Portfolio</h2>
+    </div>
+    <div class="content-body">
+      <p>A portfolio is the most powerful tool for attracting clients. It proves your skills visually and gives potential clients confidence in hiring you — even before any conversation begins.</p>
+      <h3>What to Include in Your Portfolio</h3>
+      <div class="behavior-list">
+        <div class="behavior-item">
+          <div class="behavior-dot"></div>
+          <p>Sample posts — graphics, captions, and content you have created</p>
+        </div>
+        <div class="behavior-item">
+          <div class="behavior-dot"></div>
+          <p>Content strategies — your approach to planning and executing campaigns</p>
+        </div>
+        <div class="behavior-item">
+          <div class="behavior-dot"></div>
+          <p>Results — screenshots of growth, engagement, or performance data where available</p>
+        </div>
+        <div class="behavior-item">
+          <div class="behavior-dot"></div>
+          <p>Testimonials — feedback from clients, collaborators, or supervisors</p>
+        </div>
+      </div>
+      <div class="case-study-box" style="background:linear-gradient(135deg,#FFF7ED,#FEF3C7);border-color:#FCD34D;">
+        <h4 style="color:#92400E;">
+          <i class="fa-solid fa-triangle-exclamation" style="margin-right:8px;"></i>No Clients Yet?
+        </h4>
+        <p style="color:#78350F;">Create sample projects. Pick a real business, rebuild their social media strategy as a mock project, and include it in your portfolio. Clients care about the quality of your thinking — not whether you were paid for it.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRICING YOUR SERVICES -->
+  <div class="card">
+    <div class="section-label">
+      <div class="section-label-icon"><i class="fa-solid fa-tag"></i></div>
+      <h2>Pricing Your Services</h2>
+    </div>
+    <div class="content-body">
+      <p>Pricing your services correctly is critical for sustainability. Start simple, be transparent with clients, and increase your rates as your experience and results grow.</p>
+      <h3>Common Pricing Models</h3>
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <div class="pricing-card-icon"><i class="fa-solid fa-rotate"></i></div>
+          <h4>Monthly Retainer</h4>
+          <p>A fixed monthly fee for ongoing account management — the most common and predictable model for both parties.</p>
+          <span class="pricing-tag">Most common</span>
+        </div>
+        <div class="pricing-card">
+          <div class="pricing-card-icon"><i class="fa-solid fa-clipboard-list"></i></div>
+          <h4>Per Project</h4>
+          <p>Charge a fixed fee per campaign or defined task — works well for one-off audits, launches, or strategy builds.</p>
+          <span class="pricing-tag">Flexible</span>
+        </div>
+        <div class="pricing-card">
+          <div class="pricing-card-icon"><i class="fa-solid fa-file-image"></i></div>
+          <h4>Per Post</h4>
+          <p>Charge for each individual piece of content created — suitable for clients who only need occasional posts.</p>
+          <span class="pricing-tag">Entry level</span>
+        </div>
+      </div>
+      <div class="insight-box">
+        <strong>Beginner Tip</strong>
+        Start with simple, clear pricing that is easy to explain. As you gain experience, track your results and increase your rates to reflect the value you deliver.
+      </div>
+    </div>
+  </div>
+
+  <!-- PROFESSIONALISM -->
+  <div class="card">
+    <div class="section-label">
+      <div class="section-label-icon"><i class="fa-solid fa-user-tie"></i></div>
+      <h2>Professionalism &amp; Communication</h2>
+    </div>
+    <div class="content-body">
+      <p>Your technical skills get you the client — your professionalism keeps them. Clients return to and refer managers who are reliable, clear, and easy to work with.</p>
+      <h3>Key Professional Practices</h3>
+      <div class="behavior-list">
+        <div class="behavior-item">
+          <div class="behavior-dot"></div>
+          <p>Be responsive — reply to messages and emails within a reasonable timeframe</p>
+        </div>
+        <div class="behavior-item">
+          <div class="behavior-dot"></div>
+          <p>Communicate clearly — set expectations at the start of every engagement</p>
+        </div>
+        <div class="behavior-item">
+          <div class="behavior-dot"></div>
+          <p>Deliver on time — meet every deadline you commit to, or communicate early if you cannot</p>
+        </div>
+        <div class="behavior-item">
+          <div class="behavior-dot"></div>
+          <p>Set expectations upfront — be transparent about what is and is not included in your service</p>
+        </div>
+      </div>
+      <div class="insight-box">
+        <strong>Key Insight</strong>
+        Professionalism builds long-term client relationships. A reliable manager with good communication will always outperform a skilled one who is difficult to work with.
+      </div>
+    </div>
+  </div>
+
+  <!-- REAL-WORLD EXAMPLE -->
+  <div class="card">
+    <div class="section-label">
+      <div class="section-label-icon"><i class="fa-solid fa-person-chalkboard"></i></div>
+      <h2>Real-World Example</h2>
+    </div>
+    <div class="content-body">
+      <div class="case-study-box">
+        <h4>
+          <i class="fa-solid fa-user-graduate" style="margin-right:8px;"></i>Case Study: Beginner to Freelancer
+        </h4>
+        <p style="margin-bottom:12px;">A beginner with no prior clients follows a deliberate approach to launching their freelance career:</p>
+        <ul>
+          <li>Completes a social media management course and builds foundational knowledge</li>
+          <li>Creates sample content for three fictional businesses as portfolio pieces</li>
+          <li>Reaches out directly to five local small businesses with a clear pitch</li>
+          <li>Offers a discounted first month in exchange for a testimonial and case study</li>
+        </ul>
+        <h4 style="margin-top:16px;margin-bottom:8px;">Results Achieved:</h4>
+        <ul>
+          <li>Lands their first paying client within two weeks of outreach</li>
+          <li>Builds real experience and a genuine portfolio piece</li>
+          <li>Uses the testimonial to attract two more clients — growing income over three months</li>
+        </ul>
+        <div class="case-study-lesson">
+          <strong>Lesson:</strong> Consistency and effort lead to opportunities. The path from learner to earner is shorter than most people think.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STARTER PORTFOLIO TEMPLATE -->
+  <div class="card">
+    <div class="section-label">
+      <div class="section-label-icon"><i class="fa-solid fa-table-cells"></i></div>
+      <h2>Starter Portfolio Template</h2>
+    </div>
+    <div class="checklist" id="checklist">
+      <label class="checklist-item" onclick="toggleCheck(this)">
+        <input type="checkbox"> Name — Your full name and professional title (e.g., Social Media Manager)
+      </label>
+      <label class="checklist-item" onclick="toggleCheck(this)">
+        <input type="checkbox"> Skills — Key competencies: content creation, strategy, analytics, copywriting
+      </label>
+      <label class="checklist-item" onclick="toggleCheck(this)">
+        <input type="checkbox"> Sample Work — At least 3 content examples (real or mock projects)
+      </label>
+      <label class="checklist-item" onclick="toggleCheck(this)">
+        <input type="checkbox"> Services — A clear list of what you offer and at what price range
+      </label>
+      <label class="checklist-item" onclick="toggleCheck(this)">
+        <input type="checkbox"> Contact — How potential clients can reach you (email, WhatsApp, or LinkedIn)
+      </label>
+    </div>
+  </div>
+
+  <!-- VIDEO -->
+  <div class="card">
+    <div class="section-label">
+      <div class="section-label-icon"><i class="fa-solid fa-video"></i></div>
+      <h2>Video Lesson</h2>
+    </div>
+    <div class="content-body">
+      <p style="margin-bottom:16px;">Watch the video below. While watching, note <strong>one method for getting clients</strong> and <strong>one mistake to avoid</strong> when starting out.</p>
+      <div class="video-wrap">
+        <iframe src="https://www.youtube.com/embed/I1H8Pj-D3Ao" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACTION TASK -->
+  <div class="card">
+    <div class="section-label">
+      <div class="section-label-icon"><i class="fa-solid fa-list-check"></i></div>
+      <h2>Action Task</h2>
+    </div>
+    <div class="content-body">
+      <p>Complete this three-part task to begin positioning yourself for your first career opportunity.</p>
+      <ol style="list-style:decimal;padding-left:18px;margin:14px 0 18px;">
+        <li style="font-size:15px;color:#374151;margin-bottom:8px;">Choose a career path — freelancer, in-house employee, agency, or personal brand manager — and explain why it suits you</li>
+        <li style="font-size:15px;color:#374151;margin-bottom:8px;">Write out how you will get your first client or job opportunity, including the specific steps you will take</li>
+        <li style="font-size:15px;color:#374151;">Create a simple pricing idea — what services will you offer and at what rate?</li>
+      </ol>
+      <textarea class="task-textarea" id="taskAnswer" placeholder="Career path I am choosing:&#10;Why it suits me:&#10;&#10;How I will get my first client / opportunity:&#10;Step 1: &#10;Step 2: &#10;Step 3: &#10;&#10;My initial pricing idea:&#10;Service: | Price:&#10;Service: | Price:"></textarea>
+      <button class="save-btn" onclick="saveTask()">
+        <i class="fa-solid fa-floppy-disk"></i> Save Answer
+      </button>
+      <p class="save-msg" id="saveMsg">Answer saved successfully!</p>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="card">
+    <div class="section-label">
+      <div class="section-label-icon"><i class="fa-solid fa-circle-question"></i></div>
+      <h2>Module Quiz</h2>
+    </div>
+    <div class="content-body">
+      <p style="margin-bottom:24px;">Answer all 5 questions, then click Submit to see your final score.</p>
+      <div class="quiz-form" id="quizForm">
+
+        <div class="quiz-q" data-correct="B">
+          <p class="quiz-q-text"><span class="quiz-q-num">1</span>What does freelancing in social media management mean?</p>
+          <div class="quiz-options">
+            <label class="quiz-option"><input type="radio" name="q1" value="A"> Working full-time for a single company without pay</label>
+            <label class="quiz-option"><input type="radio" name="q1" value="B"> Working independently and managing accounts for multiple clients</label>
+            <label class="quiz-option"><input type="radio" name="q1" value="C"> Working exclusively inside a company with no outside clients</label>
+            <label class="quiz-option"><input type="radio" name="q1" value="D"> Doing social media management only as a hobby</label>
+          </div>
+        </div>
+
+        <div class="quiz-q" data-correct="B">
+          <p class="quiz-q-text"><span class="quiz-q-num">2</span>What is a professional portfolio?</p>
+          <div class="quiz-options">
+            <label class="quiz-option"><input type="radio" name="q2" value="A"> A social media scheduling application</label>
+            <label class="quiz-option"><input type="radio" name="q2" value="B"> A curated collection of your work, skills, and results</label>
+            <label class="quiz-option"><input type="radio" name="q2" value="C"> A method of payment accepted by clients</label>
+            <label class="quiz-option"><input type="radio" name="q2" value="D"> A type of analytics dashboard tool</label>
+          </div>
+        </div>
+
+        <div class="quiz-q" data-correct="B">
+          <p class="quiz-q-text"><span class="quiz-q-num">3</span>Which is a common and recommended pricing model for social media managers?</p>
+          <div class="quiz-options">
+            <label class="quiz-option"><input type="radio" name="q3" value="A"> Charging random amounts for each task</label>
+            <label class="quiz-option"><input type="radio" name="q3" value="B"> A monthly retainer — a fixed fee for ongoing account management</label>
+            <label class="quiz-option"><input type="radio" name="q3" value="C"> Working only for free until you become well-known</label>
+            <label class="quiz-option"><input type="radio" name="q3" value="D"> Avoiding any pricing discussion with clients</label>
+          </div>
+        </div>
+
+        <div class="quiz-q" data-correct="C">
+          <p class="quiz-q-text"><span class="quiz-q-num">4</span>What is the most effective way to get your first social media management client?</p>
+          <div class="quiz-options">
+            <label class="quiz-option"><input type="radio" name="q4" value="A"> Wait passively for clients to find you through luck</label>
+            <label class="quiz-option"><input type="radio" name="q4" value="B"> Do nothing and hope someone recommends you</label>
+            <label class="quiz-option"><input type="radio" name="q4" value="C"> Reach out directly and demonstrate your skills through your content</label>
+            <label class="quiz-option"><input type="radio" name="q4" value="D"> Avoid all contact with potential clients to seem exclusive</label>
+          </div>
+        </div>
+
+        <div class="quiz-q" data-correct="C">
+          <p class="quiz-q-text"><span class="quiz-q-num">5</span>What builds long-term client trust and relationships?</p>
+          <div class="quiz-options">
+            <label class="quiz-option"><input type="radio" name="q5" value="A"> Consistently missing deadlines and delivering late</label>
+            <label class="quiz-option"><input type="radio" name="q5" value="B"> Poor communication and unclear expectations</label>
+            <label class="quiz-option"><input type="radio" name="q5" value="C"> Professionalism — responsiveness, clarity, and delivering on commitments</label>
+            <label class="quiz-option"><input type="radio" name="q5" value="D"> Ignoring client feedback and doing whatever you prefer</label>
+          </div>
+        </div>
+
+        <button class="quiz-submit-btn" id="quizSubmitBtn" onclick="submitQuiz()">
+          <i class="fa-solid fa-paper-plane"></i> Submit Quiz
+        </button>
+
+        <div class="quiz-result" id="quizResult">
+          <div class="quiz-result-score" id="quizScore"></div>
+          <div class="quiz-result-label" id="quizLabel"></div>
+          <div class="quiz-result-msg" id="quizMsg"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- REFLECTION -->
+  <div class="card">
+    <div class="section-label">
+      <div class="section-label-icon"><i class="fa-solid fa-pen-nib"></i></div>
+      <h2>Reflection</h2>
+    </div>
+    <div class="content-body">
+      <div class="reflection-q">
+        <label>Which career path will you pursue and why does it suit you?</label>
+        <textarea class="task-textarea" placeholder="Describe your chosen path and what makes it the right fit for your goals..."></textarea>
+      </div>
+      <div class="reflection-q">
+        <label>How will you attract and land your first client or opportunity?</label>
+        <textarea class="task-textarea" placeholder="Outline your step-by-step plan for getting started..."></textarea>
+      </div>
+      <div class="reflection-q">
+        <label>What pricing strategy will you start with and how will you grow it over time?</label>
+        <textarea class="task-textarea" placeholder="Describe your initial pricing model and your plan to increase rates as you grow..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- COURSE COMPLETION BANNER -->
+  <div class="card" style="padding:0;overflow:hidden;border:none;">
+    <div class="completion-banner">
+      <i class="fa-solid fa-graduation-cap banner-icon"></i>
+      <h3>Course Complete — Well Done!</h3>
+      <p>You have completed all 9 modules of the Social Media Management Mastery course. The skills you have built — from strategy and content creation to analytics and monetization — are real, valuable, and ready to be applied. Now go and put them to work.</p>
+    </div>
+  </div>
+
+</main>
+
+<!-- NAVIGATION -->
+<div class="module-nav">
+  <button class="nav-btn nav-btn-prev" onclick="window.location.href='smm-mod8.html'">
+    <i class="fa-solid fa-chevron-left"></i>
+    Previous Module
+  </button>
+  <span class="nav-btn-center">Module 9 of 9</span>
+  <button class="nav-btn nav-btn-finish" onclick="window.location.href='completion.html'">
+    Finish Course
+    <i class="fa-solid fa-flag-checkered"></i>
+  </button>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span>VTX Campus</span> &copy; 2026 &mdash; All rights reserved. Keep learning, keep growing.
+</footer>
+
+<script>
+  function toggleCheck(el) {
+    setTimeout(() => {
+      if (el.querySelector('input').checked) {
+        el.classList.add('checked');
+      } else {
+        el.classList.remove('checked');
+      }
+    }, 0);
+  }
+
+  function saveTask() {
+    const val = document.getElementById('taskAnswer').value.trim();
+    const msg = document.getElementById('saveMsg');
+    if (!val) { alert('Please write your answer before saving.'); return; }
+    msg.style.display = 'block';
+    setTimeout(() => msg.style.display = 'none', 3000);
+  }
+
+  function submitQuiz() {
+    const questions = document.querySelectorAll('.quiz-q');
+    const names = ['q1','q2','q3','q4','q5'];
+    let score = 0;
+    let allAnswered = true;
+
+    questions.forEach((q, i) => {
+      const correct = q.dataset.correct;
+      const selected = document.querySelector(`input[name="${names[i]}"]:checked`);
+      if (!selected) { allAnswered = false; return; }
+
+      const options = q.querySelectorAll('.quiz-option');
+      options.forEach(opt => {
+        const val = opt.querySelector('input').value;
+        opt.querySelector('input').disabled = true;
+        if (val === correct) {
+          if (selected.value === correct) {
+            opt.classList.add('correct');
+          } else {
+            opt.classList.add('missed');
+          }
+        }
+        if (val === selected.value && selected.value !== correct) {
+          opt.classList.add('incorrect');
+        }
+      });
+
+      if (selected.value === correct) score++;
+    });
+
+    if (!allAnswered) {
+      alert('Please answer all questions before submitting.');
+      return;
+    }
+
+    const btn = document.getElementById('quizSubmitBtn');
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fa-solid fa-check"></i> Quiz Submitted';
+
+    const result  = document.getElementById('quizResult');
+    const scoreEl = document.getElementById('quizScore');
+    const labelEl = document.getElementById('quizLabel');
+    const msgEl   = document.getElementById('quizMsg');
+
+    scoreEl.textContent = `${score}/5`;
+    result.classList.add('show');
+
+    if (score === 5) {
+      result.className = 'quiz-result show result-excellent';
+      labelEl.textContent = 'Excellent!';
+      msgEl.textContent = 'Perfect score! You have mastered this final module.';
+    } else if (score >= 3) {
+      result.className = 'quiz-result show result-good';
+      labelEl.textContent = 'Good Job!';
+      msgEl.textContent = "You're on the right track. Review any incorrect answers before finishing the course.";
+    } else {
+      result.className = 'quiz-result show result-improve';
+      labelEl.textContent = 'Needs Improvement';
+      msgEl.textContent = 'Please review the module content and try again for a better understanding.';
+    }
+
+    result.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+</script>
+</body>
+</html>
